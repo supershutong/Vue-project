@@ -28,7 +28,7 @@ const intersect = {
 
     el._observe.observer.unobserve(el);
     delete el._observe;
-  },
+  }
 };
 
 export default intersect;

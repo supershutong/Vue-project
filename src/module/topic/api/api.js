@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://web-api.juejin.im",
+  // baseURL: "https://web-api.juejin.im",
+  baseURL: "http://rap2.taobao.org:38080",
   timeout: 1000,
   headers: { "X-Agent": "Juejin/Web" }
 });
@@ -25,16 +26,63 @@ const DATA_TYPE = {
 };
 
 export const fetchItems = ({ type, after }) => {
-  return instance
-    .post("/query", {
-      operationName: "",
-      query: "",
-      variables: { first: 20, after, order: DATA_TYPE[type] },
-      extensions: { query: { id: "21207e9ddb1de777adeaca7a2fb38030" } }
-    })
-    .then(({ data }) => {
-      const { edges, pageInfo } = data.articleFeed.items;
-      const items = edges.map(({ node }) => node);
-      return { items, pageInfo };
-    });
+  return (
+    instance
+      // .post("/query", {
+      //   operationName: "",
+      //   query: "",
+      //   variables: { first: 20, after, order: DATA_TYPE[type] },
+      //   extensions: { query: { id: "21207e9ddb1de777adeaca7a2fb38030" } }
+      // })
+      .get("/app/mock/data/1716079", {
+        scope: "response"
+      })
+      .then(({ data }) => {
+        console.log(data);
+        const { edges, pageInfo } = data.articleFeed.items;
+        const items = edges.map(({ node }) => node);
+        return { items, pageInfo };
+      })
+  );
 };
+
+// var param = {
+//   operationName: "",
+//   query: "",
+//   variables: {
+//     first: 20,
+//     after: 0,
+//     order: ""
+//   },
+//   extensions: {
+//     query: {
+//       id: "21207e9ddb1de777adeaca7a2fb38030"
+//     }
+//   }
+// };
+
+// var response = {
+//   data: {
+//     articleFeed: {
+//       items: {
+//         edges: [
+//           {
+//             node: {
+//               originalUrl: "",
+//               title: "",
+//               tags: [
+//                 {
+//                   title: "",
+//                   id: 123
+//                 }
+//               ]
+//             }
+//           }
+//         ],
+//         pageInfo: {
+//           endCursor: 20
+//         }
+//       }
+//     }
+//   }
+// };

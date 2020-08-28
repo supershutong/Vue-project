@@ -1,5 +1,5 @@
 <template>
-  <div style="height:1500px;">
+  <div>
     <div v-for="(item, index) in items" :key="index">
       <u-item :node="item"></u-item>
     </div>
