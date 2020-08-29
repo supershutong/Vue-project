@@ -1,29 +1,29 @@
-import axios from "axios";
+import axios from "axios"
 
 const instance = axios.create({
   // baseURL: "https://web-api.juejin.im",
   baseURL: "http://rap2.taobao.org:38080",
   timeout: 1000,
   headers: { "X-Agent": "Juejin/Web" }
-});
+})
 
 instance.interceptors.response.use(
   function({ status, statusText, data }) {
     if (status !== 200) {
-      return Promise.reject();
+      return Promise.reject()
     }
-    return data;
+    return data
   },
   function(error) {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 const DATA_TYPE = {
   new: "NEWEST",
   hot: "POPULAR",
   top: "THREE_DAYS_HOTTEST"
-};
+}
 
 export const fetchItems = ({ type, after }) => {
   return (
@@ -38,13 +38,13 @@ export const fetchItems = ({ type, after }) => {
         scope: "response"
       })
       .then(({ data }) => {
-        console.log(data);
-        const { edges, pageInfo } = data.articleFeed.items;
-        const items = edges.map(({ node }) => node);
-        return { items, pageInfo };
+        console.log(data)
+        const { edges, pageInfo } = data.articleFeed.items
+        const items = edges.map(({ node }) => node)
+        return { items, pageInfo }
       })
-  );
-};
+  )
+}
 
 // var param = {
 //   operationName: "",

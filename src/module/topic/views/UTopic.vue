@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
-import UList from "../components/UList.vue";
+import { createNamespacedHelpers } from "vuex"
+import UList from "../components/UList.vue"
 
-const { mapState, mapActions } = createNamespacedHelpers("topic");
+const { mapState, mapActions } = createNamespacedHelpers("topic")
 
 export default {
   name: "u-top",
@@ -23,18 +23,18 @@ export default {
     })
   },
   created() {
-    this.fetchNext();
+    this.fetchNext()
   },
   methods: {
     ...mapActions({
       fetchData: "FETCH_LIST_DATA"
     }),
     fetchNext() {
-      const { type } = this;
-      this.fetchData({ type });
+      const { type } = this
+      this.fetchData({ type })
     }
   }
-};
+}
 </script>
 
 <style scoped>

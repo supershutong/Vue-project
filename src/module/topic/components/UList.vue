@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import UItem from "./UItem.vue";
+import UItem from "./UItem.vue"
 
 export default {
   name: "u-list",
@@ -19,5 +19,5 @@ export default {
   components: {
     UItem
   }
-};
+}
 </script>

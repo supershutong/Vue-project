@@ -17,10 +17,10 @@ export default {
   },
   computed: {
     hasTag() {
-      return this.node.tags && this.node.tags.length > 0;
+      return this.node.tags && this.node.tags.length > 0
     }
   }
-};
+}
 </script>
 
 <style scoped>

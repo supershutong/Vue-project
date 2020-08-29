@@ -1,14 +1,14 @@
-import Vue from "vue";
-import App from "./App.vue";
-import store from "./store";
+import Vue from "vue"
+import App from "./App.vue"
+import store from "./store"
 
-import intersect from "./directive/intersect";
+import intersect from "./directive/intersect"
 
-Vue.directive("intersect", intersect);
+Vue.directive("intersect", intersect)
 
 const app = new Vue({
   store,
-  render: (h) => h(App)
-});
+  render: h => h(App)
+})
 
-app.$mount("#app");
+app.$mount("#app")
