@@ -1,6 +1,6 @@
 import { fetchItems } from "./api/api"
 
-const LIST_TYPE = {
+export const LIST_TYPE = {
   TOP: "top",
   HOT: "hot",
   NEW: "new"

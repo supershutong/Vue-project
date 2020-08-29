@@ -38,7 +38,6 @@ export const fetchItems = ({ type, after }) => {
         scope: "response"
       })
       .then(({ data }) => {
-        console.log(data)
         const { edges, pageInfo } = data.articleFeed.items
         const items = edges.map(({ node }) => node)
         return { items, pageInfo }

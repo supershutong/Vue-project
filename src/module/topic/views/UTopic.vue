@@ -22,6 +22,11 @@ export default {
       items: (state) => state[state.activeType].items
     })
   },
+  watch: {
+    type(type) {
+      this.fetchData({ type })
+    }
+  },
   created() {
     this.fetchNext()
   },
