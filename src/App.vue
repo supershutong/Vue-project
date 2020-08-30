@@ -65,6 +65,10 @@ export default {
         {
           name: this.navNames[LIST_TYPE.TOP],
           path: LIST_TYPE.TOP
+        },
+        {
+          name: this.navNames.about,
+          path: "/about"
         }
       ]
     }
