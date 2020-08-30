@@ -6,15 +6,15 @@ const intersect = {
     const observer = new IntersectionObserver((entries = [], observer) => {
       if (!el._observe) return
 
-      if (handler && el._observe.init) {
-        const isIntersecting = Boolean(
-          entries.find(entry => entry.isIntersecting)
-        )
+      // if (handler && el._observe.init) {
+      const isIntersecting = Boolean(
+        entries.find(entry => entry.isIntersecting)
+      )
 
-        if (isIntersecting) {
-          handler(entries, observer, isIntersecting)
-        }
+      if (isIntersecting) {
+        handler(entries, observer, isIntersecting)
       }
+      // }
 
       el._observe.init = true
     }, options)

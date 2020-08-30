@@ -46,6 +46,6 @@ export default {
 .x-bottom {
   width: 100%;
   height: 30px;
-  background: #777;
+  /* background: #777; */
 }
 </style>

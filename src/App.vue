@@ -1,31 +1,69 @@
 <template>
   <div>
-    <div class="m-top">
-      <router-link class="m-link" v-for="nav in navs" :key="nav.path" :to="nav.path">{{nav.name}}</router-link>
+    <div class="m-top" :style="{backgroundColor:theme.primary
+    }">
+      <router-link
+        class="m-link"
+        :style="{backgroundColor:$route.name===nav.path?theme.highlight:theme.primary}"
+        v-for="nav in navs"
+        :key="nav.path"
+        :to="nav.path"
+      >{{nav.name}}</router-link>
     </div>
     <div class="m-content">
       <router-view />
+    </div>
+
+    <div class="m-side">
+      <div>
+        主题切换：
+        <button @click="themeType='red'">红</button>
+        <button @click="themeType='blue'">蓝</button>
+      </div>
+      <div>
+        语言切换：
+        <button @click="language='chinese'">中文</button>
+        <button @click="language='en'">English</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { LIST_TYPE } from "./module/topic/store"
+import config from "./config/config"
 
 export default {
+  data() {
+    return {
+      themeType: "blue",
+      language: "chinese"
+    }
+  },
+  provide() {
+    return {
+      theme: this.theme
+    }
+  },
   computed: {
+    theme() {
+      return config.get("theme")[this.themeType]
+    },
+    navNames() {
+      return config.get("language").navs[this.language]
+    },
     navs() {
       return [
         {
-          name: "热门",
+          name: this.navNames[LIST_TYPE.HOT],
           path: LIST_TYPE.HOT
         },
         {
-          name: "最新",
+          name: this.navNames[LIST_TYPE.NEW],
           path: LIST_TYPE.NEW
         },
         {
-          name: "热榜",
+          name: this.navNames[LIST_TYPE.TOP],
           path: LIST_TYPE.TOP
         }
       ]
@@ -54,7 +92,7 @@ a {
 }
 
 .m-content {
-  width: 960px;
+  width: 360px;
   border: 1px solid #eee;
   background: #fff;
   margin: 20px auto;
@@ -72,5 +110,12 @@ a {
 
 .router-link-active {
   background-color: #00a6ff;
+}
+
+.m-side {
+  position: fixed;
+  left: 50%;
+  margin-left: 220px;
+  top: 100px;
 }
 </style>

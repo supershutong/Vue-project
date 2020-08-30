@@ -1,5 +1,5 @@
 <template>
-  <a class="item" :href="node.originalUrl">
+  <a class="item" :href="node.originalUrl" :style="{borderColor:theme.primary}">
     <div class="title">{{ node.title }}</div>
     <div class="tags" v-if="hasTag">
       #
@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  inject: ["theme"], // provide/inject的数据无法响应式更新，适用于一次性初始化后不再更新的配置，响应式数据可以使用Vuex
   props: {
     node: {
       required: true
