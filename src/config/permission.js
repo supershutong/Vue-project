@@ -15,6 +15,4 @@ export const init = () => {
   })
 }
 
-export const getPermissionByRole = role => {
-  config.get("permission")[role]
-}
+export const getPermissionByRole = role => config.get("permission")[role]

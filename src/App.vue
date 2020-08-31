@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div class="m-top" :style="{backgroundColor:theme.primary
-    }">
+    <div class="m-top" :style="{ backgroundColor: theme.primary }">
       <router-link
         class="m-link"
-        :style="{backgroundColor:$route.name===nav.path?theme.highlight:theme.primary}"
+        :style="{
+          backgroundColor:
+            $route.name === nav.path ? theme.highlight : theme.primary
+        }"
         v-for="nav in navs"
         :key="nav.path"
         :to="nav.path"
-      >{{nav.name}}</router-link>
+        >{{ nav.name }}</router-link
+      >
     </div>
     <div class="m-content">
       <router-view />
@@ -17,13 +20,13 @@
     <div class="m-side">
       <div>
         主题切换：
-        <button @click="themeType='red'">红</button>
-        <button @click="themeType='blue'">蓝</button>
+        <button @click="themeType = 'red'">红</button>
+        <button @click="themeType = 'blue'">蓝</button>
       </div>
       <div>
         语言切换：
-        <button @click="language='chinese'">中文</button>
-        <button @click="language='en'">English</button>
+        <button @click="language = 'chinese'">中文</button>
+        <button @click="language = 'en'">English</button>
       </div>
     </div>
   </div>
@@ -118,8 +121,8 @@ a {
 
 .m-side {
   position: fixed;
-  left: 50%;
-  margin-left: 220px;
+  left: 0;
+  margin-left: 20px;
   top: 100px;
 }
 </style>
