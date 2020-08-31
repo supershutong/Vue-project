@@ -1,6 +1,19 @@
 <template>
-  <div class="about">about me!!</div>
+  <div class="about">
+    about me!!
+    <input type="text" v-model="x" />
+  </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      x: ""
+    }
+  }
+}
+</script>
 
 <style scoped>
 .about {

@@ -14,7 +14,9 @@
       >
     </div>
     <div class="m-content">
-      <router-view />
+      <u-keep-alive max="2">
+        <router-view />
+      </u-keep-alive>
     </div>
 
     <div class="m-side">
@@ -35,8 +37,12 @@
 <script>
 import { LIST_TYPE } from "./module/topic/store"
 import config from "./config/config"
+import UKeepAlive from "./component/UKeepAlive.vue"
 
 export default {
+  components: {
+    UKeepAlive
+  },
   data() {
     return {
       themeType: "blue",
