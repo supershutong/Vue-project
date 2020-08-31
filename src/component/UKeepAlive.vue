@@ -47,6 +47,7 @@ export default {
           pruneCacheEntry(cache, keys[0], keys, this._vnode)
         }
       }
+      vnode.data.uKeepAlive = true
     }
 
     return vnode
