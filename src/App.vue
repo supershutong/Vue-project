@@ -77,7 +77,7 @@ export default {
         },
         {
           name: this.navNames.about,
-          path: "/about"
+          path: "about"
         }
       ]
     }
