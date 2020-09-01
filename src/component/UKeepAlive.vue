@@ -9,7 +9,7 @@ import {
 function pruneCacheEntry(cache, key, keys, current) {
   const cached = cache[key]
   if (cached && (!current || cached.tag !== current.tag)) {
-    cached.componentInstance.$destory()
+    cached.componentInstance.$destroy()
   }
   cache[key] = null
   remove(keys, key)
@@ -17,6 +17,7 @@ function pruneCacheEntry(cache, key, keys, current) {
 
 export default {
   name: "u-keep-alive",
+  abstract: true,
   props: {
     max: [Number, String]
   },
@@ -32,9 +33,8 @@ export default {
     if (componentOptions) {
       const { cache, keys } = this
       const key =
-        vnode.key === null
-          ? `${componentOptions.Ctor.cid}::${componentOptions.tag}`
-          : vnode.key
+        vnode.key ||
+        `${componentOptions.Ctor.cid}::${componentOptions.tag || ""}`
       if (cache[key]) {
         vnode.componentInstance = cache[key].componentInstance // 核心：vue底层判断VNode节点是否有componentInstance属性并渲染
         remove(keys, key)
@@ -47,7 +47,7 @@ export default {
           pruneCacheEntry(cache, keys[0], keys, this._vnode)
         }
       }
-      vnode.data.uKeepAlive = true
+      vnode.data.keepAlive = true
     }
 
     return vnode
