@@ -1,10 +1,5 @@
 <script>
-import {
-  isDef,
-  remove,
-  getComponentName,
-  getFirstComponentChild
-} from "../util/vue"
+import { remove, getFirstComponentChild } from "../util/vue"
 
 function pruneCacheEntry(cache, key, keys, current) {
   const cached = cache[key]
