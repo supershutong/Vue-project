@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <div class="m-top" :style="{ backgroundColor: theme.primary }">
       <router-link
         class="m-link"

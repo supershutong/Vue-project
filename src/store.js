@@ -4,13 +4,15 @@ import { store as topic } from "./module/topic/store"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-    user: {
-      role: "CEO"
+export function createStore() {
+  return new Vuex.Store({
+    state: {
+      user: {
+        role: "CEO"
+      }
+    },
+    modules: {
+      topic
     }
-  },
-  modules: {
-    topic
-  }
-})
+  })
+}
