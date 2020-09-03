@@ -4,15 +4,9 @@ const express = require("express")
 const setUpDevServer = require("./build/setup-dev-server")
 const isProd = process.env.NODE_ENV === "production"
 
-const HTML_FILE = path.join(__dirname, "./src/index.template.html")
-const { createBundleRenderer } = require("vue-server-renderer")
+const HTML_FILE = path.join(__dirname, "./dist/index.html")
+
 const app = express()
-
-const createRenderer = (bundle, options) => {
-  createBundleRenderer(bundle, Object.assign(options, {}))
-}
-
-let renderer
 
 const resolve = file => path.resolve(__dirname, file)
 const serve = (path, cache) =>
@@ -22,26 +16,17 @@ const serve = (path, cache) =>
 
 app.use("/dist", serve("./dist", true))
 app.use("/public", serve("./public", true))
-const serverReady = setUpDevServer(app, HTML_FILE, (bundle, options) => {
-  renderer = createRenderer(bundle, options)
-})
+const serverReady = setUpDevServer(app)
 
 app.get("*", (req, res) => {
   serverReady.then(clientCompiler => {
-    // clientCompiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
-    //   if (err) {
-    //     return res.send(err)
-    //   }
-    //   res.set("content-type", "text/html")
-    //   res.send(result)
-    //   res.end()
-    // })
-    renderer.renderToString({ url: req.url }, (err, html) => {
+    clientCompiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
       if (err) {
-        res.status(404).send("404 | Not Found")
-      } else {
-        res.send(html)
+        return res.send(err)
       }
+      res.set("content-type", "text/html")
+      res.send(result)
+      res.end()
     })
   })
 })
