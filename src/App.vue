@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <div class="m-top" :style="{ backgroundColor: theme.primary }">
       <router-link
         class="m-link"
@@ -10,7 +10,8 @@
         v-for="nav in navs"
         :key="nav.path"
         :to="nav.path"
-      >{{ nav.name }}</router-link>
+        >{{ nav.name }}</router-link
+      >
     </div>
     <div class="m-content">
       <u-keep-alive max="2">
