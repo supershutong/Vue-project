@@ -13,6 +13,7 @@ export function createRouter({ store }) {
     compose(obj => obj[permission], getPermissionByRole, getRole)()
 
   return new VueRouter({
+    mode: "history",
     routes: [
       ...topic,
       {

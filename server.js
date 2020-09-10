@@ -35,6 +35,7 @@ app.get("*", (req, res) => {
     //   res.send(result);
     //   res.end();
     // });
+    console.log(req.url)
     renderer.renderToString({ url: req.url }, (err, html) => {
       if (err) {
         res.status(404).send("404 | Not Found")
