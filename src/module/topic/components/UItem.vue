@@ -11,6 +11,8 @@
 <script>
 export default {
   inject: ["theme"], // provide/inject的数据无法响应式更新，适用于一次性初始化后不再更新的配置，响应式数据可以使用Vuex
+  name: "u-item",
+  serverCacheKey: (props) => props.node.id,
   props: {
     node: {
       required: true

@@ -3,6 +3,7 @@ import { store } from "./module/topic/store"
 
 const { app, router } = createApp()
 
+// 当SSR数据渲染完成后，会在生成的HTML的script中添加一个window.__INITIAL_STATE__对象，可以将数据直接赋值给客户端渲染
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__)
 }

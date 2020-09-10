@@ -7,7 +7,7 @@
       #default="{ sliceItems }"
     >
       <u-list :items="sliceItems" />
-    </u-infinite-scroll> -->
+    </u-infinite-scroll>-->
     <u-list :items="items" />
 
     <div class="x-bottom" v-intersect="{ handler: fetchNext }"></div>
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     ...mapState({
-      items: state => state[state.activeType].items
+      items: (state) => state[state.activeType].items
     })
   },
   watch: {
@@ -38,10 +38,12 @@ export default {
       this.fetchData({ type })
     }
   },
+  // 首屏的第一个路由组件添加asyncData方法来请求数据，注意是组件的静态方法，而非在methods中定义的方法。
+  // 因为只有静态方法可以被服务端在编译时解析出来 { asyncData }
   asyncData({ store, route }) {
     return store
       .dispatch("topic/FETCH_LIST_DATA", { type: route.name })
-      .catch(e => console.error(e))
+      .catch((e) => console.error(e))
   },
   created() {
     this.fetchNext()
