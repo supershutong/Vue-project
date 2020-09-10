@@ -38,6 +38,11 @@ export default {
       this.fetchData({ type })
     }
   },
+  asyncData({ store, route }) {
+    return store
+      .dispatch("topic/FETCH_LIST_DATA", { type: route.name })
+      .catch(e => console.error(e))
+  },
   created() {
     this.fetchNext()
   },
