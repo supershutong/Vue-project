@@ -16,7 +16,7 @@ export default context => {
     router.push(url)
 
     router.onReady(() => {
-      resolve(app)
+      // resolve(app)
       // 1、根据路由表信息获取路由组件信息
       const matchedComponents = router.getMatchedComponents()
       if (!matchedComponents.length) {
