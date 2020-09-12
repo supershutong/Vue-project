@@ -30,14 +30,16 @@ export const store = {
     SET_LIST: (state, { items, pageInfo }) => {
       state[state.activeType].pageInfo = pageInfo
       items.forEach(item => {
-        state[state.activeType].items.push(item)
+        item && state[state.activeType].items.push(item)
       })
     }
   },
   actions: {
     FETCH_LIST_DATA: async ({ commit, state }, { type }) => {
+      const prev = state.activeType
       commit("SET_ACTIVE_TYPE", { type })
-      const after = state[type].pageInfo.endCursor || 0
+      if (type !== prev && state[type].items.length) return
+      const after = state[type].pageInfo.endCursor || ""
       const { items, pageInfo } = await fetchItems({ type, after })
       return commit("SET_LIST", { items, pageInfo })
     }

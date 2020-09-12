@@ -38,17 +38,16 @@ export default {
       this.fetchData({ type })
     }
   },
-  // // 首屏的第一个路由组件添加asyncData方法来请求数据，注意是组件的静态方法，而非在methods中定义的方法。
-  // // 因为只有静态方法可以被服务端在编译时解析出来 { asyncData }
-  // asyncData({ store, route }) {
-  //   console.log(route)
-  //   return store
-  //     .dispatch("topic/FETCH_LIST_DATA", { type: route.name })
-  //     .catch((e) => console.error(e))
-  // },
-  created() {
-    this.fetchNext()
+  // 首屏的第一个路由组件添加asyncData方法来请求数据，注意是组件的静态方法，而非在methods中定义的方法。
+  // 因为只有静态方法可以被服务端在编译时解析出来 { asyncData }
+  asyncData({ store, route }) {
+    return store
+      .dispatch("topic/FETCH_LIST_DATA", { type: route.name })
+      .catch((e) => console.error(e))
   },
+  // created() {
+  //   this.fetchNext()
+  // },
   methods: {
     ...mapActions({
       fetchData: "FETCH_LIST_DATA"
@@ -64,7 +63,6 @@ export default {
 <style scoped>
 .x-bottom {
   width: 100%;
-  height: 30px;
-  /* background: #777; */
+  height: 1px;
 }
 </style>

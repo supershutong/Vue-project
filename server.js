@@ -53,7 +53,6 @@ app.get("*", (req, res) => {
     // });
 
     // 缓存：命中缓存则直接返回html，不再请求数据
-    console.log(req.url)
     const hit = microCache.get(req.url)
     if (hit) {
       !isProd && console.log(`whole req in ${Date.now() - s}ms`)
@@ -61,7 +60,6 @@ app.get("*", (req, res) => {
     }
 
     renderer.renderToString({ url: req.url }, (err, html) => {
-      console.log(err)
       if (err) {
         res.status(404).send("404 | Not Found")
       } else {
