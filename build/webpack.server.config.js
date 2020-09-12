@@ -11,10 +11,10 @@ const config = merge(base, {
   resolve: {
     alias: {}
   },
-  target: "node",
+  target: "node", // webpack打包输出文件的运行环境
   output: {
     filename: "server-bundle.js",
-    libraryTarget: "commonjs2"
+    libraryTarget: "commonjs2" // Node环境运行标准commonjs2
   },
   externals: nodeExternals({}),
   plugins: [

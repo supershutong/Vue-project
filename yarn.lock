@@ -3428,7 +3428,7 @@ punycode@^2.1.0:
 
 puppeteer@^1.7.0:
   version "1.20.0"
-  resolved "https://registry.npm.taobao.org/puppeteer/download/puppeteer-1.20.0.tgz?cache=0&sync_timestamp=1597320879319&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpuppeteer%2Fdownload%2Fpuppeteer-1.20.0.tgz#e3d267786f74e1d87cf2d15acc59177f471bbe38"
+  resolved "https://registry.npm.taobao.org/puppeteer/download/puppeteer-1.20.0.tgz#e3d267786f74e1d87cf2d15acc59177f471bbe38"
   integrity sha1-49JneG904dh88tFazFkXf0cbvjg=
   dependencies:
     debug "^4.1.0"
