@@ -12,7 +12,7 @@ module.exports = {
   mode: isProd ? "production" : "development",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    publicPath: "./",
+    publicPath: "/dist/",
     filename: isProd ? "[name].js" : "[name].[chunkhash].js"
   },
   resolve: {

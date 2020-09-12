@@ -53,46 +53,46 @@ app.get("*", (req, res) => {
     // });
 
     // 缓存：命中缓存则直接返回html，不再请求数据
-    // const hit = microCache.get(req.url)
-    // if (hit) {
-    //   !isProd && console.log(`whole req in ${Date.now() - s}ms`)
-    //   return res.end(hit)
-    // }
-
-    // console.log(req.url)
-    // renderer.renderToString({ url: req.url }, (err, html) => {
-    //   console.log(err)
-    //   if (err) {
-    //     res.status(404).send("404 | Not Found")
-    //   } else {
-    //     // 添加缓存
-    //     // microCache.set(req.url, html)
-    //     res.send(html)
-    //     !isProd && console.log(`whole req in ${Date.now() - s}ms`)
-    //   }
-    // })
-
-    // stream 流式渲染
-    const stream = renderer.renderToStream({ url: req.url })
-    let html = ""
-
-    stream.on("data", chunk => {
-      html += chunk.toString()
-      res.write(chunk.toString())
-    })
-
-    stream.on("end", () => {
-      // 添加缓存
-      microCache.set(req.url, html)
-      res.end()
+    console.log(req.url)
+    const hit = microCache.get(req.url)
+    if (hit) {
       !isProd && console.log(`whole req in ${Date.now() - s}ms`)
-    })
+      return res.end(hit)
+    }
 
-    stream.on("error", err => {
+    renderer.renderToString({ url: req.url }, (err, html) => {
+      console.log(err)
       if (err) {
         res.status(404).send("404 | Not Found")
+      } else {
+        // 添加缓存
+        microCache.set(req.url, html)
+        res.send(html)
+        !isProd && console.log(`whole req in ${Date.now() - s}ms`)
       }
     })
+
+    // // stream 流式渲染
+    // const stream = renderer.renderToStream({ url: req.url })
+    // let html = ""
+
+    // stream.on("data", chunk => {
+    //   html += chunk.toString()
+    //   res.write(chunk.toString())
+    // })
+
+    // stream.on("end", () => {
+    //   // 添加缓存
+    //   microCache.set(req.url, html)
+    //   res.end()
+    //   !isProd && console.log(`whole req in ${Date.now() - s}ms`)
+    // })
+
+    // stream.on("error", err => {
+    //   if (err) {
+    //     res.status(404).send("404 | Not Found")
+    //   }
+    // })
   })
 })
 let port = process.env.PORT || 3000
