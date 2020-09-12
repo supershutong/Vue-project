@@ -59,38 +59,38 @@ app.get("*", (req, res) => {
       return res.end(hit)
     }
 
-    renderer.renderToString({ url: req.url }, (err, html) => {
-      if (err) {
-        res.status(404).send("404 | Not Found")
-      } else {
-        // 添加缓存
-        microCache.set(req.url, html)
-        res.send(html)
-        !isProd && console.log(`whole req in ${Date.now() - s}ms`)
-      }
-    })
-
-    // // stream 流式渲染
-    // const stream = renderer.renderToStream({ url: req.url })
-    // let html = ""
-
-    // stream.on("data", chunk => {
-    //   html += chunk.toString()
-    //   res.write(chunk.toString())
-    // })
-
-    // stream.on("end", () => {
-    //   // 添加缓存
-    //   microCache.set(req.url, html)
-    //   res.end()
-    //   !isProd && console.log(`whole req in ${Date.now() - s}ms`)
-    // })
-
-    // stream.on("error", err => {
+    // renderer.renderToString({ url: req.url }, (err, html) => {
     //   if (err) {
     //     res.status(404).send("404 | Not Found")
+    //   } else {
+    //     // 添加缓存
+    //     microCache.set(req.url, html)
+    //     res.send(html)
+    //     !isProd && console.log(`whole req in ${Date.now() - s}ms`)
     //   }
     // })
+
+    // stream 流式渲染
+    const stream = renderer.renderToStream({ url: req.url })
+    let html = ""
+
+    stream.on("data", chunk => {
+      html += chunk.toString()
+      res.write(chunk.toString())
+    })
+
+    stream.on("end", () => {
+      // 添加缓存
+      microCache.set(req.url, html)
+      res.end()
+      !isProd && console.log(`whole req in ${Date.now() - s}ms`)
+    })
+
+    stream.on("error", err => {
+      if (err) {
+        res.status(404).send("404 | Not Found")
+      }
+    })
   })
 })
 let port = process.env.PORT || 3000
