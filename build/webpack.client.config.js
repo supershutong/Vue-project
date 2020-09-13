@@ -25,15 +25,20 @@ const config = merge(base, {
   ]
 })
 
-// 静态资源，如帮助页面等，建议使用prerender放在cdn服务器
-// 生产环境才做prerender预渲染
-// 原理： client webpack => html js css
-// PrerenderSPAPlugin headless chrome puperteer
-// 此时如果渲染结果没有预渲染的html内容，则很有可能是publicPath路径不对
+/**
+ * 静态资源，如帮助页面等，建议使用prerender把生成的文件放在cdn/web服务器，
+ * 然后在nginx配置用户访问指定的静态资源时直接重定向到cdn/web资源服务器
+ *
+ * 原理： client webpack => html js css
+ * PrerenderSPAPlugin headless chrome puperteer
+ *
+ * 注意：1、此时如果渲染结果没有预渲染的html内容，则很有可能是publicPath路径不对，改为相对路径 ./
+ * 2、生产环境才做prerender预渲染
+ */
 if (process.env.NODE_ENV === "production") {
   config.plugins.push(
     new HtmlWebpackPlugin({
-      template: "src/prerender.template.html"
+      template: "src/prerender.template.html" // prerender页面要重写入口模版
     }),
     new PrerenderSPAPlugin({
       staticDir: path.join(__dirname, "../dist"),

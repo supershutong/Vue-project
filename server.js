@@ -9,9 +9,15 @@ const HTML_FILE = path.join(__dirname, "./src/index.template.html")
 const { createBundleRenderer } = require("vue-server-renderer")
 const app = express()
 
+/** LRU缓存应用场景：
+ * 1、底层的内存管理，页面置换算法
+ * 2、一般的缓存服务，memcache\redis之类
+ * 主要用于解决性能瓶颈
+ */
+// 页面级别缓存实例
 const microCache = new LRU({
   max: 100,
-  maxAge: 1000 * 60
+  maxAge: 1000 * 60 // 缓存时间60s,适用于高并发场景
 })
 
 const createRenderer = (bundle, options) =>
@@ -63,14 +69,14 @@ app.get("*", (req, res) => {
     //   if (err) {
     //     res.status(404).send("404 | Not Found")
     //   } else {
-    //     // 添加缓存
+    //     // 添加页面级别缓存
     //     microCache.set(req.url, html)
     //     res.send(html)
     //     !isProd && console.log(`whole req in ${Date.now() - s}ms`)
     //   }
     // })
 
-    // stream 流式渲染
+    // stream 流式渲染 + 缓存
     const stream = renderer.renderToStream({ url: req.url })
     let html = ""
 
