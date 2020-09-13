@@ -69,9 +69,8 @@ export default {
 
     getPrefetchComponents() {
       const ref = this.$router.resolve(this.$attrs.to, this.$route)
-      console.log(ref)
+      // console.log(ref)
       const Components = ref.resolved.matched.map((r) => r.components.default)
-
       return Components.filter(
         (Component) =>
           typeof Component === "function" &&
@@ -83,7 +82,6 @@ export default {
     prefetchLink() {
       observe.unobserve(this.$el)
       const Components = this.getPrefetchComponents()
-
       for (const Component of Components) {
         Component()
         Component.__prefetched = true

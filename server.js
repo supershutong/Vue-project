@@ -24,10 +24,12 @@ const createRenderer = (bundle, options) =>
   createBundleRenderer(
     bundle,
     Object.assign(options, {
-      // cache: new LRU({
+      // cache: LRU({
       //   max: 100,
       //   maxAge: 1000 * 60
       // })
+
+      // 可基于文件扩展名进行类型推断。参见 * SSR文档 *
       shouldPrefetch: (file, type) => false // 默认不启用prefetch，需要的地方用户在页面自行配置prefetch
     })
   )
