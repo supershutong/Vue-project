@@ -3,6 +3,7 @@ const intersect = {
     const value = binding.value
     const { handler, options = {} } = value
 
+    // IntersectionObserver API可异步观察目标元素与其祖先元素或顶级文档视窗交叉状态。祖先元素与视窗viewport被成为根root
     const observer = new IntersectionObserver((entries = [], observer) => {
       if (!el._observe) return
 

@@ -12,7 +12,7 @@
 export default {
   inject: ["theme"], // provide/inject的数据无法响应式更新，适用于一次性初始化后不再更新的配置，响应式数据可以使用Vuex
   name: "u-item", // 缓存组件的name必须唯一，其将被作为cacheKey使用。
-  serverCacheKey: (props) => props.node.id, // 纯静态组件建议返回常量，此时组件将始终被缓存。
+  // serverCacheKey: (props) => props.node.id, // 纯静态组件建议返回常量，此时组件将始终被缓存。
   props: {
     node: {
       required: true

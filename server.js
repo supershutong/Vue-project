@@ -24,10 +24,11 @@ const createRenderer = (bundle, options) =>
   createBundleRenderer(
     bundle,
     Object.assign(options, {
-      cache: new LRU({
-        max: 100,
-        maxAge: 1000 * 60
-      })
+      // cache: new LRU({
+      //   max: 100,
+      //   maxAge: 1000 * 60
+      // })
+      shouldPrefetch: (file, type) => false // 默认不启用prefetch，需要的地方用户在页面自行配置prefetch
     })
   )
 

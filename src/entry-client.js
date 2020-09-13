@@ -1,6 +1,8 @@
 import { createApp } from "./app"
 import Vue from "vue"
 const { app, router, store } = createApp()
+import ULink from "./component/ULink.client.vue"
+Vue.component("u-link", ULink)
 
 // 当SSR数据渲染完成后，会在生成的HTML的script中添加一个window.__INITIAL_STATE__对象，可以将数据直接赋值给客户端渲染
 if (window.__INITIAL_STATE__) {

@@ -1,5 +1,8 @@
 import { createApp } from "./app"
 const isDev = process.env.NODE_ENV !== "production"
+import Vue from "vue"
+import ULink from "./component/ULink.server.vue"
+Vue.component("u-link", ULink)
 
 export default context => {
   return new Promise((resolve, reject) => {

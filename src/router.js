@@ -19,7 +19,8 @@ export function createRouter({ store }) {
       {
         name: "about",
         path: "/about",
-        component: () => import("./views/UAbout.vue"),
+        component: () =>
+          import(/* webpackChunkName:"about" */ "./views/UAbout.vue"),
         beforeEnter(to, from, next) {
           getPermission(PERMISSION_MAP.ABOUT_PAGE) ? next() : next("403")
         }
@@ -27,7 +28,7 @@ export function createRouter({ store }) {
       {
         name: "403",
         path: "/403",
-        component: () => import("./views/403.vue")
+        component: () => import(/* webpackChunkName:"403" */ "./views/403.vue")
       },
       {
         path: "/",
